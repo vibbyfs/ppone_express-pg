@@ -15,17 +15,28 @@
                     <form action="/register" method="POST" class="space-y-4">
                         <div>
                             <label class="form-label">Username</label>
-                            <input type="text" name="username" class="form-input">
+                            <input type="text" name="username" placeholder="Username" class="form-input">
+                            <% if (errors && errors.username) { %>
+                                <p class="text-red-600">
+                                    <%= errors.username %>
+                                </p>
+                                <% } %>
                         </div>
 
                         <div>
                             <label class="form-label">Email</label>
-                            <input type="text" name="email" class="form-input">
+                            <input type="text" name="email" placeholder="Email" class="form-input">
+                            <% if (errors && errors.email) { %>
+                                <p class="text-red-600">
+                                    <%= errors.email %>
+                                </p>
+                                <% } %>
+
                         </div>
 
                         <div>
                             <label class="form-label">Password</label>
-                            <input type="text" name="password" class="form-input">
+                            <input type="password" name="password" placeholder="Password" class="form-input">
                         </div>
 
                         <!-- <div>
