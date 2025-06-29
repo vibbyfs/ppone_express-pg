@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build:css": "npx tailwindcss -i ./src/input.css -o ./public/css/style.css --minify",
-    "dev": "concurrently \"npx tailwindcss -i ./src/input.css -o ./public/css/style.css --watch\" \"nodemon app.js\""
+    "build:css": "npx tailwindcss -i ./public/css/tailwind.css -o ./public/css/main.css --minify",
+    "dev": "concurrently \"npx tailwindcss -i ./public/css/tailwind.css -o ./public/css/main.css --watch\" \"nodemon app.js\""
   },
   "keywords": [],
   "author": "",

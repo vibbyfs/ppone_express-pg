@@ -5,8 +5,11 @@ module.exports = {
     "./public/**/*.js"
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['Poppins'],
+      },
+    },
   },
   plugins: [],
-}
-
+};

@@ -1,3 +1,64 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Base styles */
+@import "./base/typography.css";
+/* Components */
+@import "./components/layout.css";
+/* Utilities (opsional) */
+@import "./utilities/custom-utilities.css";
+
+@layer components {
+  /* Layout Container */
+  .container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Buttons */
+  .btn {
+    @apply inline-block px-4 py-2 rounded text-white font-medium transition;
+  }
+
+  .btn-primary {
+    @apply btn bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600;
+  }
+
+  .btn-google {
+    @apply flex items-center justify-center border border-gray-300 py-2 px-4 rounded text-sm bg-white hover:bg-gray-100 transition w-full;
+  }
+
+  /* Form */
+  .form-label {
+    @apply block mb-1 text-sm font-medium text-gray-700;
+  }
+
+  .form-input {
+    @apply w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500;
+  }
+
+  /* Typography */
+  .section-title {
+    @apply text-2xl font-semibold text-gray-800 mb-6 text-center;
+  }
+
+  .link-hover {
+    @apply hover:text-pink-300 transition-colors duration-200;
+  }
+
+  .link-white-hover {
+    @apply text-white hover:text-pink-200 transition-colors duration-200;
+  }
+
+  .btn-3d {
+    @apply inline-block px-4 py-2 rounded font-semibold text-white bg-gradient-to-r from-pink-500 to-purple-500 shadow-md transition-all duration-200;
+  }
+
+  .btn-3d:hover {
+    @apply shadow-lg -translate-y-0.5;
+  }
+
+  .btn-3d:active {
+    @apply shadow-sm translate-y-0;
+  }
+}
