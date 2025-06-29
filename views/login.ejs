@@ -1,35 +1,47 @@
-<%- include("partials/navbar") %>
+<!DOCTYPE html>
+<html lang="en">
 
-    <div
-        class="min-h-screen bg-gradient-to-br from-pink-100 via-purple-100 to-blue-100 pt-24 px-4 pb-16 flex justify-center items-start">
-        <div class="bg-white shadow-md rounded-lg p-6 w-full max-w-md">
-            <h1 class="section-title">Login to your account</h1>
+<%- include ('partials/_head', {title: 'Home' }) %>
 
-            <form action="/login" method="POST" class="space-y-4">
-                <div>
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" name="email" id="email" class="form-input" required>
+    <body>
+
+        <%- include("partials/_navbar") %>
+
+            <div
+                class="min-h-screen bg-gradient-to-br from-pink-100 via-purple-100 to-blue-100 pt-24 px-4 pb-16 flex justify-center items-start">
+                <div class="bg-white shadow-md rounded-lg p-6 w-full max-w-md">
+                    <h1 class="section-title">Login to your account</h1>
+
+                    <form action="/login" method="POST" class="space-y-4">
+                        <div>
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" name="email" id="email" class="form-input" required>
+                        </div>
+
+                        <div>
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" name="password" id="password" class="form-input" required>
+                        </div>
+
+                        <div class="text-right text-sm">
+                            <a href="/forgot-password" class="text-blue-600 hover:underline">Forgot password?</a>
+                        </div>
+
+                        <button type="submit" class="btn-3d w-full">Login</button>
+
+                        <div class="text-center my-4 text-gray-500 text-sm">OR</div>
+
+                        <a href="/auth/google" class="btn-google">
+                            <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5 mr-2"
+                                alt="Google">
+                            Login with Google
+                        </a>
+                    </form>
                 </div>
+            </div>
 
-                <div>
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" name="password" id="password" class="form-input" required>
-                </div>
+            <%- include("partials/_footer") %>
 
-                <div class="text-right text-sm">
-                    <a href="/forgot-password" class="text-blue-600 hover:underline">Forgot password?</a>
-                </div>
+    </body>
 
-                <button type="submit" class="btn btn-primary w-full">Login</button>
-
-                <div class="text-center my-4 text-gray-500 text-sm">OR</div>
-
-                <a href="/auth/google" class="btn-google">
-                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5 mr-2" alt="Google">
-                    Login with Google
-                </a>
-            </form>
-        </div>
-    </div>
-
-    <%- include("partials/footer") %>
+</html>

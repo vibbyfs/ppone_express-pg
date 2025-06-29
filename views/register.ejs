@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include ('partials/_head', {title: 'Home' }) %>
+
+    <body>
+
+        <%- include("partials/_navbar") %>
+
+            <div
+                class="min-h-screen bg-gradient-to-br from-pink-100 via-purple-100 to-blue-100 pt-24 px-4 pb-16 flex justify-center items-start">
+                <div class="bg-white shadow-md rounded-lg p-6 w-full max-w-md">
+                    <h1 class="section-title">Create an Account</h1>
+
+                    <form action="/register" method="POST" class="space-y-4">
+                        <div>
+                            <label class="form-label">Username</label>
+                            <input type="text" name="username" class="form-input">
+                        </div>
+
+                        <div>
+                            <label class="form-label">Email</label>
+                            <input type="text" name="email" class="form-input">
+                        </div>
+
+                        <div>
+                            <label class="form-label">Password</label>
+                            <input type="text" name="password" class="form-input">
+                        </div>
+
+                        <!-- <div>
+                            <label class="form-label">Confirm Password</label>
+                            <input type="password" name="confirmPassword" class="form-input">
+                        </div> -->
+
+                        <button type="submit" class="btn-3d w-full">Register</button>
+
+                        <p class="text-sm text-center text-gray-600 mt-4">
+                            Already have an account?
+                            <a href="/login" class="link-hover font-medium">Login</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+
+            <%- include("partials/_footer") %>
+
+    </body>
+
+</html>
