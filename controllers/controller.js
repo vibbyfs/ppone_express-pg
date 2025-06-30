@@ -40,13 +40,17 @@ class Controller {
             }
 
             const hashedPassword = await bcrypt.hash(password, saltRounds)
-            await User.create({
+            const user = await User.create({
                 username,
                 email,
                 password: hashedPassword
             })
-            res.redirect('/')
-
+            req.login(user, (err) => {
+                if (err) {
+                    return res.send(err)
+                }
+                res.redirect('/dashboard')
+            })
         } catch (error) {
             res.send(error)
         }
