@@ -5,7 +5,6 @@
 
     <body>
 
-
         <%- include("partials/_navbar") %>
 
             <div
@@ -13,41 +12,40 @@
                 <div class="bg-white shadow-md rounded-lg p-6 w-full max-w-md">
                     <h1 class="section-title">Login to your account</h1>
 
-                    <form action="/login" method="POST" class="space-y-4">
-                        <div>
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" name="email" class="form-input">
-                            <% if(errors && errors.email) { %>
-                                <p class="text-red-600">
-                                    <%= errors.email %>
-                                </p>
-                                <% } %>
-                        </div>
+                    <% if (message) { %>
+                        <p>
+                            <%= message %>
+                        </p>
+                        <% } %>
 
-                        <div>
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" name="password" class="form-input">
-                            <% if(errors && errors.password) { %>
-                                <p class="text-red-600">
-                                    <%= errors.password %>
-                                </p>
-                                <% } %>
-                        </div>
+                            <form action="/login" method="POST" class="space-y-4">
+                                <div>
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" name="email" class="form-input">
 
-                        <div class="text-right text-sm">
-                            <a href="/forgot-password" class="text-blue-600 hover:underline">Forgot password?</a>
-                        </div>
+                                </div>
 
-                        <button type="submit" class="btn-3d w-full">Login</button>
+                                <div>
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" name="password" class="form-input">
 
-                        <div class="text-center my-4 text-gray-500 text-sm">OR</div>
+                                </div>
 
-                        <a href="/auth/google" class="btn-google">
-                            <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5 mr-2"
-                                alt="Google">
-                            Login with Google
-                        </a>
-                    </form>
+                                <div class="text-right text-sm">
+                                    <a href="/forgot-password" class="text-blue-600 hover:underline">Forgot
+                                        password?</a>
+                                </div>
+
+                                <button type="submit" class="btn-3d w-full">Login</button>
+
+                                <div class="text-center my-4 text-gray-500 text-sm">OR</div>
+
+                                <a href="/auth/google" class="btn-google">
+                                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5 mr-2"
+                                        alt="Google">
+                                    Login with Google
+                                </a>
+                            </form>
                 </div>
             </div>
 

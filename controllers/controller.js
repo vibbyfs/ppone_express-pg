@@ -54,33 +54,20 @@ class Controller {
 
     static async getLogin(req, res) {
         try {
-            const { errors } = req.query
-            res.render('login', { errors })
+            const { message } = req.query
+            res.render('login', { message })
         } catch (error) {
             res.send(error)
         }
     }
 
-    static async postLogin(req, res) {
+    static async getDashboard(req, res) {
         try {
-            const { email, password } = req.body
-
-            const user = await User.findOne({
-                where: { email }
-            })
-
-            if (!user) {
-                return res.render('login', { errors: { email: 'Email tidak ditemukan' } })
+            if (req.isAuthenticated()) {
+                res.render('dashboard')
+            } else {
+                res.redirect('/login')
             }
-
-            const passMatch = await bcrypt.compare(password, user.password)
-
-            if (!passMatch) {
-                return res.render('login', { errors: { password: 'Passwords salah' } })
-            }
-
-            res.redirect('/')
-
         } catch (error) {
             res.send(error)
         }
