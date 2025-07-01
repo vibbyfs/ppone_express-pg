@@ -1,19 +1,12 @@
-<nav class="fixed top-0 left-0 w-full bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-white shadow z-50">
+<nav class="fixed top-0 left-0 w-full bg-gradient-to-r from-blue-500 to-amber-300 text-white shadow z-50">
     <div class="container flex justify-between items-center h-16">
         <a href="/" class="text-xl font-bold">MyLogo</a>
-
-        <div class="hidden md:flex space-x-6 text-sm font-medium">
-            <a href="/" class="link-hover">Home</a>
-            <a href="/about" class="link-hover">About</a>
-            <a href="/contact" class="link-hover">Contact</a>
-        </div>
 
         <div class="hidden md:flex space-x-4">
             <a href="/login" class="link-hover pt-2">Login</a>
             <a href="/register" class="btn-3d w-full">Register</a>
         </div>
 
-        <!-- Mobile Menu Button -->
         <div class="md:hidden">
             <button id="menu-toggle">
                 <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -23,12 +16,11 @@
         </div>
     </div>
 
-    <!-- Mobile Menu -->
     <div id="mobile-menu" class="md:hidden hidden bg-white text-gray-800 px-4 pb-4">
         <a href="/" class="block py-2">Home</a>
         <a href="/about" class="block py-2">About</a>
         <a href="/contact" class="block py-2">Contact</a>
-        <a href="/login" class="block py-2">Login</a>
+        <a href="/login" class="block py-2 btn btn-primary text-center mt-2">Login</a>
         <a href="/register" class="block py-2 btn btn-primary text-center mt-2">Register</a>
     </div>
 
