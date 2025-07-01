@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "username": "callback_hell",
+    "email": "callback@gmail.com",
+    "password": "123456",
+    "role": ""
+  },
+  {
+    "id": 2,
+    "username": "nested_callback",
+    "email": "nested@gmail.com",
+    "password": "123456",
+    "role": ""
+  },
+  {
+    "id": 3,
+    "username": "promise",
+    "email": "promise@gmail.com",
+    "password": "123456",
+    "role": ""
+  }
+]

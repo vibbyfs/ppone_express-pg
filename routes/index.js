@@ -10,7 +10,8 @@ router.get('/register', Controller.getRegister)
 router.post('/register', Controller.postRegister)
 
 router.get('/auth/google', passport.authenticate('google', {
-    scope: ['profile', 'email']
+    scope: ['profile', 'email'],
+    prompt: 'select_account'
 }))
 router.get('/auth/google/dashboard', passport.authenticate('google', {
     successRedirect: '/dashboard',
@@ -23,7 +24,7 @@ router.post('/login', passport.authenticate('local', {
     failureRedirect: '/login',
 }))
 
-router.get('/logout', (req, res)=> {
+router.get('/logout', (req, res) => {
     req.logout((err) => {
         if (err) res.send(err);
         res.redirect('/')
