@@ -49,7 +49,7 @@ class Controller {
                 if (err) {
                     return res.send(err)
                 }
-                res.redirect('/dashboard')
+                res.redirect('/registrasi')
             })
         } catch (error) {
             res.send(error)
@@ -92,6 +92,15 @@ class Controller {
             res.send(error)
         }
     }
+
+    static async userProfiles(req, res) {
+        try {
+            res.render('formUserProfile')
+        } catch (error) {
+            res.send(error)
+        }
+    }
+
 
 }
 

@@ -4,6 +4,7 @@ const Controller = require('../controllers/controller')
 const passport = require('../lib/passport')
 const routerTransactions = require('./transactions')
 const routerUserprofiles = require('./userPorfile')
+const routerRegistrasi = require('./registrasi')
 
 router.get('/', Controller.home)
 
@@ -36,6 +37,7 @@ router.get('/dashboard', Controller.getDashboard)
 
 router.use('/transactions', routerTransactions)
 router.use('/userprofile', routerUserprofiles)
+router.use('/registrasi', routerRegistrasi)
 
 
 module.exports = router
