@@ -1,4 +1,4 @@
-const { User } = require('../models')
+const { User, UserProfile, Account } = require('../models')
 const bcrypt = require('bcrypt')
 
 class Controller {
@@ -7,6 +7,7 @@ class Controller {
         try {
             res.render('home')
         } catch (error) {
+            console.log(error);
             res.send(error)
         }
     }
@@ -16,6 +17,7 @@ class Controller {
             const { errors } = req.query
             res.render('register', { errors })
         } catch (error) {
+            console.log(error);
             res.send(error)
         }
     }
@@ -45,13 +47,21 @@ class Controller {
                 email,
                 password: hashedPassword
             })
+
+            await Account.create({
+                balance: 0,
+                account_type: 'main_wallet',
+                user_id: user.id
+            });
+
             req.login(user, (err) => {
                 if (err) {
                     return res.send(err)
                 }
-                res.redirect('/registrasi')
+                res.redirect('/userprofiles/create')
             })
         } catch (error) {
+            console.log(error);
             res.send(error)
         }
     }
@@ -61,46 +71,70 @@ class Controller {
             const { message } = req.query
             res.render('login', { message })
         } catch (error) {
+            console.log(error);
             res.send(error)
         }
     }
 
-    static async getDashboard(req, res) {
+    static async getAccount(req, res) {
         try {
             if (req.isAuthenticated()) {
-                res.render('dashboard')
+                res.render('account')
             } else {
                 res.redirect('/login')
             }
         } catch (error) {
+            console.log(error);
             res.send(error)
         }
     }
 
-    static async transactions(req, res) {
+    static async getCreateUserProfile(req, res) {
         try {
-            res.render('transactions')
+            res.render('formCreateProfile')
+        } catch (error) {
+            console.log(error);
+            res.send(error)
+        }
+    }
+
+    static async postCreateUserProfile(req, res) {
+        try {
+            const { fullname, date_of_birth, adress, phone_number, image } = req.body
+            const user_id = req.user.id;
+
+            await UserProfile.create({
+                fullname,
+                date_of_birth,
+                adress,
+                phone_number,
+                image,
+                user_id
+            })
+            res.redirect('/accounts')
+        } catch (error) {
+            console.log(error);
+            res.send(error)
+        }
+    }
+
+
+    static async getTransaction(req, res) {
+        try {
+            res.render('transaction')
+        } catch (error) {
+            console.log(error);
+            res.send(error)
+        }
+    }
+
+    static async getAccount(req, res) {
+        try {
+            res.render('account')
         } catch (error) {
             res.send(error)
         }
     }
-
-    static async userProfiles(req, res) {
-        try {
-            res.render('userProfile')
-        } catch (error) {
-            res.send(error)
-        }
-    }
-
-    static async userProfiles(req, res) {
-        try {
-            res.render('formUserProfile')
-        } catch (error) {
-            res.send(error)
-        }
-    }
-
 
 }
 
