@@ -3,7 +3,7 @@ const router = express.Router();
 const Controller = require('../controllers/controller')
 const passport = require('../lib/passport')
 const routerTransactions = require('./transactions')
-
+const routerUserprofiles = require('./userPorfile')
 
 router.get('/', Controller.home)
 
@@ -35,5 +35,7 @@ router.get('/logout', (req, res) => {
 router.get('/dashboard', Controller.getDashboard)
 
 router.use('/transactions', routerTransactions)
+router.use('/userprofile', routerUserprofiles)
+
 
 module.exports = router

@@ -84,6 +84,15 @@ class Controller {
             res.send(error)
         }
     }
+
+    static async userProfiles(req, res) {
+        try {
+            res.render('userProfile')
+        } catch (error) {
+            res.send(error)
+        }
+    }
+
 }
 
 module.exports = Controller
