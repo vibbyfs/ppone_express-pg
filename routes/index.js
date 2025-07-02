@@ -7,6 +7,7 @@ const routerAccount = require('./account')
 const routerTransaction = require('./transactions')
 
 router.get('/', Controller.home)
+router.get('/dashboard', Controller.dashboard)
 
 router.use('/', routerAuth)
 router.use('/userprofiles', routerUserProfile)

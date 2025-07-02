@@ -130,8 +130,18 @@ class Controller {
 
     static async getAccount(req, res) {
         try {
-            res.render('account')
+            res.render('account');
         } catch (error) {
+            console.log(error);
+            res.send(error)
+        }
+    }
+
+    static async dashboard(req, res) {
+        try {
+            res.render('dashboard')
+        } catch (error) {
+            console.log(error);
             res.send(error)
         }
     }
