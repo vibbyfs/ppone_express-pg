@@ -7,60 +7,56 @@
 
         <%- include("partials/_navbar") %>
 
-            <div
-                class="min-h-screen bg-gradient-to-br from-pink-100 via-purple-100 to-blue-100 pt-24 px-4 pb-16 flex justify-center items-start">
-                <div class="bg-white shadow-md rounded-lg p-6 w-full max-w-md">
-                    <h1 class="section-title">Create an Account</h1>
+            <section
+                class="min-h-screen bg-gradient-to-br from-blue-50 via-amber-50 to-blue-100 flex items-center justify-center px-4">
+                <div class=" bg-white shadow-md rounded-lg p-6 w-full max-w-md">
+                <h1 class="section-title">Create an Account</h1>
 
-                    <form action="/register" method="POST" class="space-y-4">
-                        <div>
-                            <label class="form-label">Username</label>
-                            <input type="text" name="username" placeholder="Username" class="form-input">
-                            <% if (errors && errors.username) { %>
-                                <p class="text-red-600">
-                                    <%= errors.username %>
-                                </p>
-                                <% } %>
-                        </div>
+                <form action="/register" method="POST" class="space-y-4">
+                    <div>
+                        <label class="form-label">Username</label>
+                        <input type="text" name="username" placeholder="Username" class="form-input">
+                        <% if (errors && errors.username) { %>
+                            <p class="text-red-600">
+                                <%= errors.username %>
+                            </p>
+                            <% } %>
+                    </div>
 
-                        <div>
-                            <label class="form-label">Email</label>
-                            <input type="text" name="email" placeholder="Email" class="form-input">
-                            <% if (errors && errors.email) { %>
-                                <p class="text-red-600">
-                                    <%= errors.email %>
-                                </p>
-                                <% } %>
+                    <div>
+                        <label class="form-label">Email</label>
+                        <input type="text" name="email" placeholder="Email" class="form-input">
+                        <% if (errors && errors.email) { %>
+                            <p class="text-red-600">
+                                <%= errors.email %>
+                            </p>
+                            <% } %>
 
-                        </div>
+                    </div>
 
-                        <div>
-                            <label class="form-label">Password</label>
-                            <input type="password" name="password" placeholder="Password" class="form-input">
-                        </div>
+                    <div>
+                        <label class="form-label">Password</label>
+                        <input type="password" name="password" placeholder="Password" class="form-input">
+                    </div>
 
-                        <!-- <div>
-                            <label class="form-label">Confirm Password</label>
-                            <input type="password" name="confirmPassword" class="form-input">
-                        </div> -->
+                    <button type="submit" class="btn-3d w-full">Register</button>
 
-                        <button type="submit" class="btn-3d w-full">Register</button>
+                    <p class="text-sm text-center text-gray-600 mt-4">
+                        Already have an account?
+                        <a href="/login" class="link-hover font-medium">Login</a>
+                    </p>
 
-                        <p class="text-sm text-center text-gray-600 mt-4">
-                            Already have an account?
-                            <a href="/login" class="link-hover font-medium">Login</a>
-                        </p>
-
-                        <a href="/auth/google" class="btn-google">
-                            <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5 mr-2"
-                                alt="Google">
-                            Register with Google
-                        </a>
-                    </form>
+                    <a href="/auth/google" class="btn-google">
+                        <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5 mr-2"
+                            alt="Google">
+                        Register with Google
+                    </a>
+                </form>
                 </div>
-            </div>
 
-            <%- include("partials/_footer") %>
+                <%- include("partials/_footer") %>
+            </section>
+
 
     </body>
 

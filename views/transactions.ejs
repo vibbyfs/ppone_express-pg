@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Finance Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="bg-gray-50">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Simple Sidebar -->
+        <div class="w-56 bg-gradient-to-r from-blue-500 to-amber-300 text-white p-4 hidden md:block">
+            <div class="flex items-center mb-8 space-x-2">
+                <i class="fas fa-wallet text-xl"></i>
+                <span class="text-lg font-semibold">FinTrack</span>
+            </div>
+
+            <nav class="space-y-3">
+                <a href="/dashboard" class="flex items-center space-x-2 p-2 rounded hover:bg-blue-700">
+                    <i class="fas fa-chart-pie w-5"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="/transactions" class="flex items-center space-x-2 p-2 rounded hover:bg-blue-700">
+                    <i class="fas fa-exchange-alt w-5"></i>
+                    <span>Transactions</span>
+                </a>
+                <a href="#" class="flex items-center space-x-2 p-2 rounded hover:bg-blue-700">
+                    <i class="fas fa-piggy-bank w-5"></i>
+                    <span>Budget</span>
+                </a>
+                <a href="#" class="flex items-center space-x-2 p-2 rounded hover:bg-blue-700">
+                    <i class="fas fa-cog w-5"></i>
+                    <span>Settings</span>
+                </a>
+                <a href="/logout" class="block p-2 rounded hover:bg-blue-700 text-white">
+                    <i class="fas fa-sign-out-alt w-5"></i>
+                    <span>Logout</span>
+                </a>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Header -->
+            <header class="bg-white shadow-sm p-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <button id="mobile-menu-toggle" class="md:hidden mr-4 text-gray-500">
+                            <i class="fas fa-bars text-xl"></i>
+                        </button>
+                        <h1 class="text-xl font-semibold">Transactions</h1>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
+                            <i class="fas fa-user text-gray-600"></i>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="fixed inset-0 z-50 hidden bg-gray-800 bg-opacity-75">
+                <div
+                    class="absolute top-0 left-0 h-screen w-56 bg-blue-800 p-4 transform -translate-x-full transition-transform duration-300">
+                    <div class="flex items-center justify-between mb-8">
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-wallet text-xl"></i>
+                            <span class="text-lg font-semibold">FinTrack</span>
+                        </div>
+                        <button id="mobile-menu-close" class="text-white">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <nav class="space-y-3">
+                        <a href="#" class="block p-2 rounded bg-blue-700 text-white">
+                            <i class="fas fa-chart-pie w-5"></i>
+                            <span>Dashboard</span>
+                        </a>
+                        <a href="#" class="block p-2 rounded hover:bg-blue-700 text-white">
+                            <i class="fas fa-exchange-alt w-5"></i>
+                            <span>Transactions</span>
+                        </a>
+                        <a href="#" class="block p-2 rounded hover:bg-blue-700 text-white">
+                            <i class="fas fa-piggy-bank w-5"></i>
+                            <span>Budget</span>
+                        </a>
+                        <a href="#" class="block p-2 rounded hover:bg-blue-700 text-white">
+                            <i class="fas fa-cog w-5"></i>
+                            <span>Settings</span>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <main class="flex-1 p-6 overflow-y-auto">
+                <!-- Transactions Filter Section -->
+                <div class="bg-white rounded-lg shadow p-4 mb-6">
+                    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-4">
+                        <div>
+                            <h2 class="text-lg font-semibold">All Transactions</h2>
+                            <p class="text-xs text-gray-500">Filter transactions by type and date</p>
+                        </div>
+                        <div class="flex gap-2 w-full sm:w-auto">
+                            <select
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2">
+                                <option selected>All Types</option>
+                                <option>Income</option>
+                                <option>Expense</option>
+                            </select>
+                            <select
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2">
+                                <option selected>Last 30 Days</option>
+                                <option>This Month</option>
+                                <option>Last Month</option>
+                                <option>Custom</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between mb-4">
+                        <button class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+                            <i class="fas fa-plus mr-2"></i>Add Transaction
+                        </button>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                <i class="fas fa-search text-gray-400"></i>
+                            </div>
+                            <input type="text"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2"
+                                placeholder="Search transactions...">
+                        </div>
+                    </div>
+
+                    <!-- Table Headers -->
+                    <div
+                        class="hidden md:grid grid-cols-12 gap-4 p-2 bg-gray-50 rounded mb-2 text-sm font-medium text-gray-500">
+                        <div class="col-span-3">Description</div>
+                        <div class="col-span-2">Category</div>
+                        <div class="col-span-2">Date</div>
+                        <div class="col-span-2">Amount</div>
+                        <div class="col-span-2">Status</div>
+                        <div class="col-span-1">Actions</div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <!-- Transaction Items -->
+                        <div class="flex flex-col md:grid md:grid-cols-12 gap-4 p-2 hover:bg-gray-50 rounded border-b">
+                            <div class="col-span-3 flex items-center space-x-3">
+                                <div class="p-2 rounded-full bg-green-100 text-green-600">
+                                    <i class="fas fa-arrow-down"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium">Salary Deposit</p>
+                                    <p class="text-xs text-gray-500 md:hidden">Today, 10:45 AM</p>
+                                </div>
+                            </div>
+                            <div class="col-span-2 text-sm">
+                                <span class="md:hidden text-gray-500">Category:</span>
+                                Income
+                            </div>
+                            <div class="col-span-2 text-sm hidden md:block">Today, 10:45 AM</div>
+                            <div class="col-span-2 font-medium text-green-600">
+                                <span class="md:hidden text-gray-500">Amount:</span>
+                                +$2,500
+                            </div>
+                            <div class="col-span-2">
+                                <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Completed</span>
+                            </div>
+                            <div class="col-span-1 text-right">
+                                <button class="text-gray-400 hover:text-gray-600">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Second Transaction -->
+                        <div class="flex flex-col md:grid md:grid-cols-12 gap-4 p-2 hover:bg-gray-50 rounded border-b">
+                            <div class="col-span-3 flex items-center space-x-3">
+                                <div class="p-2 rounded-full bg-red-100 text-red-600">
+                                    <i class="fas fa-shopping-bag"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium">Grocery Store</p>
+                                    <p class="text-xs text-gray-500 md:hidden">Yesterday, 3:15 PM</p>
+                                </div>
+                            </div>
+                            <div class="col-span-2 text-sm">
+                                <span class="md:hidden text-gray-500">Category:</span>
+                                Shopping
+                            </div>
+                            <div class="col-span-2 text-sm hidden md:block">Yesterday, 3:15 PM</div>
+                            <div class="col-span-2 font-medium text-red-600">
+                                <span class="md:hidden text-gray-500">Amount:</span>
+                                -$95.24
+                            </div>
+                            <div class="col-span-2">
+                                <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Completed</span>
+                            </div>
+                            <div class="col-span-1 text-right">
+                                <button class="text-gray-400 hover:text-gray-600">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- More transactions would go here... -->
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="flex justify-between items-center mt-6">
+                        <div class="text-sm text-gray-500">
+                            Showing 1 to 10 of 100 transactions
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="px-3 py-1 border rounded text-gray-600 hover:bg-gray-100">Previous</button>
+                            <button class="px-3 py-1 bg-blue-600 text-white rounded">1</button>
+                            <button class="px-3 py-1 border rounded text-gray-600 hover:bg-gray-100">2</button>
+                            <button class="px-3 py-1 border rounded text-gray-600 hover:bg-gray-100">Next</button>
+                        </div>
+                    </div>
+                </div>
+                <h2 class="text-lg font-semibold mb-4">Quick Actions</h2>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    <button
+                        class="p-3 rounded-lg border hover:border-blue-500 hover:bg-blue-50 flex flex-col items-center">
+                        <div class="p-2 rounded-full bg-blue-500 text-white mb-2">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <span class="text-sm">Add Money</span>
+                    </button>
+
+                    <button
+                        class="p-3 rounded-lg border hover:border-green-500 hover:bg-green-50 flex flex-col items-center">
+                        <div class="p-2 rounded-full bg-green-500 text-white mb-2">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <span class="text-sm">Transfer</span>
+                    </button>
+
+                    <button
+                        class="p-3 rounded-lg border hover:border-yellow-500 hover:bg-yellow-50 flex flex-col items-center">
+                        <div class="p-2 rounded-full bg-yellow-500 text-white mb-2">
+                            <i class="fas fa-file-invoice"></i>
+                        </div>
+                        <span class="text-sm">Bills</span>
+                    </button>
+
+                    <button
+                        class="p-3 rounded-lg border hover:border-purple-500 hover:bg-purple-50 flex flex-col items-center">
+                        <div class="p-2 rounded-full bg-purple-500 text-white mb-2">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <span class="text-sm">Reports</span>
+                    </button>
+                </div>
+        </div>
+        </main>
+    </div>
+    </div>
+    <script>
+        // Mobile menu toggle functionality
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuPanel = mobileMenu.querySelector('div');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden');
+            setTimeout(() => {
+                mobileMenuPanel.classList.remove('-translate-x-full');
+            }, 10);
+        });
+
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenuPanel.classList.add('-translate-x-full');
+            setTimeout(() => {
+                mobileMenu.classList.add('hidden');
+            }, 300);
+        });
+    </script>
+</body>
+
+</html>

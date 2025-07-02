@@ -76,6 +76,14 @@ class Controller {
             res.send(error)
         }
     }
+
+    static async transactions(req, res) {
+        try {
+            res.render('transactions')
+        } catch (error) {
+            res.send(error)
+        }
+    }
 }
 
 module.exports = Controller

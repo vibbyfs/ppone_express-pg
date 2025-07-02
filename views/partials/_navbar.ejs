@@ -1,9 +1,10 @@
-<nav class="fixed top-0 left-0 w-full bg-gradient-to-r from-blue-500 to-amber-300 text-white shadow z-50">
-    <div class="container flex justify-between items-center h-16">
-        <a href="/" class="text-xl font-bold">MyLogo</a>
+<nav
+    class="fixed top-4 left-1/2 transform -translate-x-1/2 w-[95%] max-w-7xl bg-gradient-to-r from-blue-500 to-amber-300 text-white shadow-lg rounded-full z-50 backdrop-blur bg-opacity-90">
+    <div class="container mx-auto flex justify-between items-center h-14 px-4">
+        <a href="/" class="text-xl font-bold px-5">Dompet Dims</a>
 
-        <div class="hidden md:flex space-x-4">
-            <a href="/login" class="link-hover pt-2">Login</a>
+        <div class="hidden md:flex space-x-4 px-10">
+            <a href="/login" class="link-hover pt-2 font-bold">Login</a>
             <a href="/register" class="btn-3d w-full">Register</a>
         </div>
 
@@ -15,20 +16,29 @@
             </button>
         </div>
     </div>
-
-    <div id="mobile-menu" class="md:hidden hidden bg-white text-gray-800 px-4 pb-4">
-        <a href="/" class="block py-2">Home</a>
-        <a href="/about" class="block py-2">About</a>
-        <a href="/contact" class="block py-2">Contact</a>
-        <a href="/login" class="block py-2 btn btn-primary text-center mt-2">Login</a>
-        <a href="/register" class="block py-2 btn btn-primary text-center mt-2">Register</a>
-    </div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const toggle = document.getElementById("menu-toggle");
-            const menu = document.getElementById("mobile-menu");
-            toggle.addEventListener("click", () => menu.classList.toggle("hidden"));
-        });
-    </script>
 </nav>
+
+<div id="mobile-menu"
+    class="md:hidden hidden absolute left-1/2 transform -translate-x-1/2 top-[95px] w-[95%] max-w-7xl bg-white text-gray-800 px-4 pb-4 rounded-xl shadow-lg z-40">
+    <a href="/" class="block py-2 text-center font-bold">Home</a>
+    <a href="/login" class="block py-2 btn-3d w-full text-center mt-2">Login</a>
+    <a href="/register" class="block py-2 btn-3d w-full text-center mt-2">Register</a>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const toggle = document.getElementById("menu-toggle");
+        const menu = document.getElementById("mobile-menu");
+
+        toggle.addEventListener("click", () => {
+            menu.classList.toggle("hidden");
+
+            // Optional: Lock scroll on mobile
+            if (!menu.classList.contains("hidden")) {
+                document.body.classList.add("overflow-hidden");
+            } else {
+                document.body.classList.remove("overflow-hidden");
+            }
+        });
+    });
+</script>

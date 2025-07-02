@@ -5,18 +5,18 @@
     <body class="bg-gray-50">
         <div class="flex h-screen overflow-hidden">
             <!-- Simple Sidebar -->
-            <div class="w-56 bg-blue-800 text-white p-4 hidden md:block">
+            <div class="w-56 bg-gradient-to-r from-blue-500 to-amber-300 text-white p-4 hidden md:block">
                 <div class="flex items-center mb-8 space-x-2">
                     <i class="fas fa-wallet text-xl"></i>
-                    <span class="text-lg font-semibold">FinTrack</span>
+                    <span class="text-lg font-semibold">Dompet Dims</span>
                 </div>
 
                 <nav class="space-y-3">
-                    <a href="#" class="flex items-center space-x-2 p-2 rounded bg-blue-700">
+                    <a href="#" class="flex items-center space-x-2 p-2 rounded hover:bg-blue-700">
                         <i class="fas fa-chart-pie w-5"></i>
                         <span>Dashboard</span>
                     </a>
-                    <a href="#" class="flex items-center space-x-2 p-2 rounded hover:bg-blue-700">
+                    <a href="/transactions" class="flex items-center space-x-2 p-2 rounded hover:bg-blue-700">
                         <i class="fas fa-exchange-alt w-5"></i>
                         <span>Transactions</span>
                     </a>
@@ -28,6 +28,10 @@
                         <i class="fas fa-cog w-5"></i>
                         <span>Settings</span>
                     </a>
+                    <a href="/logout" class="block p-2 rounded hover:bg-blue-700 text-white">
+                        <i class="fas fa-sign-out-alt w-5"></i>
+                        <span>Logout</span>
+                    </a>
                 </nav>
             </div>
 
@@ -36,15 +40,18 @@
                 <!-- Header -->
                 <header class="bg-white shadow-sm p-4">
                     <div class="flex items-center justify-between">
-                        <div class="flex items-center">
+                        <div class="flex items-center gap-3">
                             <button id="mobile-menu-toggle" class="md:hidden mr-4 text-gray-500">
                                 <i class="fas fa-bars text-xl"></i>
                             </button>
                             <h1 class="text-xl font-semibold">Dashboard</h1>
+                            <div>
+                                <a href="" class="btn-3d p-2"><button>Shopping</button></a>
+                            </div>
                         </div>
                         <div class="flex items-center space-x-3">
-                            <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
-                                <i class="fas fa-user text-gray-600"></i>
+                            <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
+                                <a href=""><i class="fas fa-user text-gray-600"></i></a>
                             </div>
                         </div>
                     </div>
@@ -57,7 +64,7 @@
                         <div class="flex items-center justify-between mb-8">
                             <div class="flex items-center space-x-2">
                                 <i class="fas fa-wallet text-xl"></i>
-                                <span class="text-lg font-semibold">FinTrack</span>
+                                <span class="text-lg font-semibold">Dompet Dims</span>
                             </div>
                             <button id="mobile-menu-close" class="text-white">
                                 <i class="fas fa-times"></i>
@@ -79,6 +86,10 @@
                             <a href="#" class="block p-2 rounded hover:bg-blue-700 text-white">
                                 <i class="fas fa-cog w-5"></i>
                                 <span>Settings</span>
+                            </a>
+                            <a href="/logout" class="block p-2 rounded hover:bg-blue-700 text-white">
+                                <i class="fas fa-sign-out-alt w-5"></i>
+                                <span>Logout</span>
                             </a>
                         </nav>
                     </div>

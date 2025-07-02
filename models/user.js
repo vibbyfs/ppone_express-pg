@@ -25,19 +25,19 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'User',
   });
 
-  // User.beforeCreate(async (user, options) => {
-  //   if (user.password) {
-  //     const saltRounds = await bcrypt.genSalt(10);
-  //     user.password = await bcrypt.hash(user.password, saltRounds);
-  //   }
-  // });
+  User.beforeCreate(async (user, options) => {
+    if (user.password) {
+      const saltRounds = await bcrypt.genSalt(10);
+      user.password = await bcrypt.hash(user.password, saltRounds);
+    }
+  });
 
-  // User.beforeUpdate(async (user, options) => {
-  //   if (user.changed('password')) {
-  //     const saltRounds = await bcrypt.genSalt(10);
-  //     user.password = await bcrypt.hash(user.password, saltRounds);
-  //   }
-  // });
+  User.beforeUpdate(async (user, options) => {
+    if (user.changed('password')) {
+      const saltRounds = await bcrypt.genSalt(10);
+      user.password = await bcrypt.hash(user.password, saltRounds);
+    }
+  });
 
   return User;
 };

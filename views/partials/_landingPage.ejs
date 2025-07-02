@@ -1,20 +1,29 @@
-<section class="min-h-screen bg-white text-gray-900">
-    <div class="container flex flex-col-reverse md:flex-row items-center justify-between py-20 md:py-32 gap-10">
+<body class="overflow-hidden h-screen">
+    <div class="flex flex-col justify-between h-screen bg-white text-gray-900">
 
-        <div class="flex-1 text-left">
-            <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 leading-tight">
-                Welcome to Our Platform
-            </h1>
-            <p class="text-base sm:text-lg md:text-xl mb-6 max-w-xl">
-                Build your future with our modern Personal finance management and Services.
-            </p>
-            <a href="/register" class="btn-3d w-max">Get Started</a>
-        </div>
+        <section class="flex-1 flex items-center justify-center">
+            <div class="container flex flex-col-reverse md:flex-row items-center justify-between gap-10 max-w-6xl px-4">
 
-        <div class="flex-1">
-            <img src="/images/hero-bg.jpg" alt="Finance illustration"
-                class="w-full max-w-md mx-auto rounded-xl shadow-lg" />
-        </div>
+                <div class="flex-1 text-center md:text-left slide-in-left">
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 leading-tight">
+                        Welcome to Our Platform
+                    </h1>
+                    <p class="text-base sm:text-lg md:text-xl mb-6 max-w-xl mx-auto md:mx-0">
+                        Build your future with our modern Personal finance management and Services.
+                    </p>
+                    <a href="/register" class="btn-3d w-max mx-auto md:mx-0 transition hover:scale-105 duration-300">
+                        Get Started
+                    </a>
+                </div>
+
+                <div class="flex-1 slide-in-right">
+                    <img src="/images/hero-bg.jpg" alt="Finance illustration"
+                        class="w-full max-w-md mx-auto rounded-xl shadow-lg transition hover:scale-105 duration-500" />
+                </div>
+
+            </div>
+        </section>
+
 
     </div>
-</section>
+</body>
