@@ -20,11 +20,76 @@ module.exports = (sequelize, DataTypes) => {
   }
   UserProfile.init({
     user_id: DataTypes.INTEGER,
-    fullname: DataTypes.STRING,
-    date_of_birth: DataTypes.DATE,
-    adress: DataTypes.STRING,
-    phone_number: DataTypes.STRING,
-    image: DataTypes.STRING
+    user_id: DataTypes.INTEGER,
+    fullname: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: 'Fullname required.'
+        },
+        notEmpty: {
+          msg: 'Fullname required.'
+        },
+        len: {
+          args: [3, 100],
+          msg: 'Fullname 3-100 chars.'
+        }
+      }
+    },
+    date_of_birth: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: 'Date of birth required.'
+        },
+        isDate: {
+          msg: 'Invalid date of birth.'
+        },
+
+      }
+    },
+    address: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: 'Address required.'
+        },
+        notEmpty: {
+          msg: 'Address required.'
+        },
+        len: {
+          args: [10, 255],
+          msg: 'Address 10-255 chars.'
+        }
+      }
+    },
+    phone_number: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        notNull: {
+          msg: 'Phone number required.'
+        },
+        notEmpty: {
+          msg: 'Phone number required.'
+        },
+        isNumeric: {
+          msg: 'Phone number must be numeric.'
+        },
+        len: {
+          args: [10, 15],
+          msg: 'Phone number 10-15 digits.'
+        },
+        is: {
+          args: /^(\+62|0)\d{9,13}$/,
+          msg: 'Invalid phone number format.'
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'UserProfile',

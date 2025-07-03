@@ -149,6 +149,7 @@ class Controller {
     static async getTransaction(req, res) {
         try {
             const userId = req.user.id;
+            const { search } = req.query;
 
             const accounts = await Account.findAll({
                 where: { user_id: userId },
@@ -157,14 +158,17 @@ class Controller {
 
             const accountIds = accounts.map(acc => acc.id);
 
+            let whereClause = { account_id: accountIds };
+            if (search) {
+                whereClause.description = { [Op.iLike]: `%${search}%` };
+            }
+
             const transactions = await Transaction.findAll({
-                where: {
-                    account_id: accountIds
-                },
+                where: whereClause,
                 order: [['date', 'DESC']]
             });
 
-            res.render('transaction', { data: transactions });
+            res.render('transaction', { data: transactions, search });
         } catch (error) {
             console.log(error);
             res.send(error);
