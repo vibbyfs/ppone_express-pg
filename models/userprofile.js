@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     get formatDate() {
       return this.date_of_birth.toISOString().split('T')[0]
     }
+
   }
   UserProfile.init({
     user_id: DataTypes.INTEGER,

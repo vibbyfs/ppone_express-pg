@@ -11,14 +11,6 @@
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
-  .btn {
-    @apply inline-block px-4 py-2 rounded text-white font-medium transition;
-  }
-
-  .btn-primary {
-    @apply btn rounded bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600;
-  }
-
   .btn-google {
     @apply flex items-center justify-center border border-gray-300 py-2 px-4 rounded text-sm bg-white hover:bg-gray-100 transition w-full;
   }
@@ -44,7 +36,7 @@
   }
 
   .btn-3d {
-    @apply inline-block px-4 py-2 rounded font-semibold text-white shadow-md transition-all duration-200 bg-gradient-to-r from-blue-600 to-amber-500;
+    @apply inline-block px-4 py-2 font-semibold shadow-md transition-all duration-200 text-white hover:bg-blue-700 rounded-lg;
   }
 
   .btn-3d:hover {

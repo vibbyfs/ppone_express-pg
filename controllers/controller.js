@@ -2,6 +2,7 @@ const { User, UserProfile, Account, Transaction } = require('../models')
 const bcrypt = require('bcrypt');
 const { render } = require('ejs');
 const { Op, where } = require('sequelize')
+const { timeAgoDetail } = require('../helper/helper')
 
 class Controller {
 
@@ -63,8 +64,14 @@ class Controller {
                 res.redirect('/userprofiles/create')
             })
         } catch (error) {
-            console.log(error);
-            res.send(error)
+            if (error.name === 'SequelizeValidationError') {
+                const messages = error.errors.map(e => e.message);
+                console.log(messages);
+
+                res.render('register', { messages });
+            } else {
+                res.send(error);
+            }
         }
     }
 
@@ -73,8 +80,12 @@ class Controller {
             const { message } = req.query
             res.render('login', { message })
         } catch (error) {
-            console.log(error);
-            res.send(error)
+            if (error.name === 'SequelizeValidationError') {
+                const messages = error.errors.map(e => e.message);
+                res.render('login', { messages });
+            } else {
+                res.send(error);
+            }
         }
     }
 
@@ -160,7 +171,6 @@ class Controller {
         }
     }
 
-
     static async getAccount(req, res) {
         try {
             res.render('account');
@@ -199,7 +209,7 @@ class Controller {
             const { fullname, date_of_birth, adress, phone_number, image } = req.body;
 
             await UserProfile.update(
-                { fullname, date_of_birth: new Date(date_of_birth), adress, phone_number, image },
+                { fullname, date_of_birth, adress, phone_number, image },
                 { where: { user_id: userId } }
             )
 
@@ -213,13 +223,23 @@ class Controller {
     static async getUserProfile(req, res) {
         try {
             const data = await UserProfile.findOne({ where: { user_id: req.user.id } });
-            res.render('userProfile', { data });
+            res.render('userProfile', { data, timeAgoDetail });
         } catch (error) {
             console.log(error);
             res.send(error);
         }
     }
 
+    static async deleteTransaction(req, res) {
+        try {
+            const { id } = req.params;
+            await Transaction.destroy({ where: { id } });
+            res.redirect('/transactions');
+        } catch (error) {
+            console.log(error);
+            res.send(error);
+        }
+    }
 
 }
 
