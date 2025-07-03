@@ -1,5 +1,7 @@
-const { User, UserProfile, Account } = require('../models')
-const bcrypt = require('bcrypt')
+const { User, UserProfile, Account, Transaction } = require('../models')
+const bcrypt = require('bcrypt');
+const { render } = require('ejs');
+const { Op, where } = require('sequelize')
 
 class Controller {
 
@@ -91,6 +93,11 @@ class Controller {
 
     static async getCreateUserProfile(req, res) {
         try {
+            const user_id = req.user.id;
+            const existingProfile = await UserProfile.findOne({ where: { user_id } });
+            if (existingProfile) {
+                return res.redirect('/dashboard');
+            }
             res.render('formCreateProfile')
         } catch (error) {
             console.log(error);
@@ -110,23 +117,49 @@ class Controller {
                 phone_number,
                 image,
                 user_id
-            })
-            res.redirect('/accounts')
+            });
+
+            const account = await Account.findOne({ where: { user_id } });
+            if (!account) {
+                await Account.create({
+                    balance: 0,
+                    account_type: 'main_wallet',
+                    user_id
+                });
+            }
+
+            res.redirect('/accounts');
         } catch (error) {
             console.log(error);
-            res.send(error)
+            res.send(error);
         }
     }
-
 
     static async getTransaction(req, res) {
         try {
-            res.render('transaction')
+            const userId = req.user.id;
+
+            const accounts = await Account.findAll({
+                where: { user_id: userId },
+                attributes: ['id']
+            });
+
+            const accountIds = accounts.map(acc => acc.id);
+
+            const transactions = await Transaction.findAll({
+                where: {
+                    account_id: accountIds
+                },
+                order: [['date', 'DESC']]
+            });
+
+            res.render('transaction', { data: transactions });
         } catch (error) {
             console.log(error);
-            res.send(error)
+            res.send(error);
         }
     }
+
 
     static async getAccount(req, res) {
         try {
@@ -139,12 +172,54 @@ class Controller {
 
     static async dashboard(req, res) {
         try {
-            res.render('dashboard')
+            const id = req.user
+            let data = await UserProfile.findOne({ user_id: id })
+            console.log(req.user);
+
+            res.render('dashboard', { data })
         } catch (error) {
             console.log(error);
             res.send(error)
         }
     }
+
+    static async getEditUserProfile(req, res) {
+        try {
+            const userId = req.user.id;
+            const data = await UserProfile.findOne({ where: { user_id: userId } });
+            res.render('editUser', { data })
+        } catch (error) {
+            res.send(error)
+        }
+    }
+
+    static async postEditUserProfile(req, res) {
+        try {
+            const userId = req.user.id
+            const { fullname, date_of_birth, adress, phone_number, image } = req.body;
+
+            await UserProfile.update(
+                { fullname, date_of_birth: new Date(date_of_birth), adress, phone_number, image },
+                { where: { user_id: userId } }
+            )
+
+            res.redirect('/userprofiles')
+        } catch (error) {
+            console.log(error);
+            res.send(error)
+        }
+    }
+
+    static async getUserProfile(req, res) {
+        try {
+            const data = await UserProfile.findOne({ where: { user_id: req.user.id } });
+            res.render('userProfile', { data });
+        } catch (error) {
+            console.log(error);
+            res.send(error);
+        }
+    }
+
 
 }
 

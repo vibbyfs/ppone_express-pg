@@ -1,6 +1,6 @@
 [
   {
-    "account_id": 3,
+    "account_id": 10,
     "amount": 500000,
     "date": "2025-07-01",
     "description": "Topup",
@@ -8,7 +8,7 @@
     "updatedAt": "2025-07-01T08:00:00Z"
   },
   {
-    "account_id": 3,
+    "account_id": 10,
     "amount": -150000,
     "date": "2025-07-02",
     "description": "Withdraw",
@@ -16,7 +16,7 @@
     "updatedAt": "2025-07-02T10:30:00Z"
   },
   {
-    "account_id": 3,
+    "account_id": 10,
     "amount": 300000,
     "date": "2025-07-02",
     "description": "Topup",
@@ -24,7 +24,7 @@
     "updatedAt": "2025-07-02T11:00:00Z"
   },
   {
-    "account_id": 3,
+    "account_id": 10,
     "amount": -50000,
     "date": "2025-07-03",
     "description": "Withdraw",
@@ -32,7 +32,7 @@
     "updatedAt": "2025-07-03T15:45:00Z"
   },
   {
-    "account_id": 3,
+    "account_id": 10,
     "amount": -100000,
     "date": "2025-07-04",
     "description": "Withdraw",
@@ -40,7 +40,7 @@
     "updatedAt": "2025-07-04T09:15:00Z"
   },
   {
-    "account_id": 3,
+    "account_id": 10,
     "amount": 400000,
     "date": "2025-07-05",
     "description": "Topup",
@@ -48,7 +48,7 @@
     "updatedAt": "2025-07-05T08:20:00Z"
   },
   {
-    "account_id": 3,
+    "account_id": 10,
     "amount": -75000,
     "date": "2025-07-05",
     "description": "Withdraw",
@@ -56,7 +56,7 @@
     "updatedAt": "2025-07-05T20:00:00Z"
   },
   {
-    "account_id": 3,
+    "account_id": 10,
     "amount": -120000,
     "date": "2025-07-06",
     "description": "Withdraw",
@@ -64,7 +64,7 @@
     "updatedAt": "2025-07-06T14:10:00Z"
   },
   {
-    "account_id": 1,
+    "account_id": 10,
     "amount": 100000,
     "date": "2025-07-06",
     "description": "Topup",
@@ -72,7 +72,7 @@
     "updatedAt": "2025-07-06T17:30:00Z"
   },
   {
-    "account_id": 1,
+    "account_id": 10,
     "amount": -200000,
     "date": "2025-07-07",
     "description": "Withdraw",
@@ -80,7 +80,7 @@
     "updatedAt": "2025-07-07T11:00:00Z"
   },
   {
-    "account_id": 3,
+    "account_id": 10,
     "amount": 150000,
     "date": "2025-07-07",
     "description": "Topup",
@@ -88,7 +88,7 @@
     "updatedAt": "2025-07-07T18:00:00Z"
   },
   {
-    "account_id": 3,
+    "account_id": 10,
     "amount": -100000,
     "date": "2025-07-08",
     "description": "Withdraw",
@@ -96,7 +96,7 @@
     "updatedAt": "2025-07-08T10:00:00Z"
   },
   {
-    "account_id": 3,
+    "account_id": 10,
     "amount": -80000,
     "date": "2025-07-08",
     "description": "Withdraw",
@@ -104,7 +104,7 @@
     "updatedAt": "2025-07-08T20:15:00Z"
   },
   {
-    "account_id": 3,
+    "account_id": 10,
     "amount": 200000,
     "date": "2025-07-09",
     "description": "Topup",
@@ -112,7 +112,7 @@
     "updatedAt": "2025-07-09T09:00:00Z"
   },
   {
-    "account_id": 3,
+    "account_id": 10,
     "amount": -30000,
     "date": "2025-07-09",
     "description": "Withdraw",

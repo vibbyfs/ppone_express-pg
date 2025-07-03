@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Transaction.hasMany(models.TransactionCategory, {foreignKey : 'transaction_id'})
-      Transaction.belongsTo(models.Account, {foreignKey : 'Account_id'})
+      Transaction.belongsTo(models.Account, {foreignKey : 'account_id'})
     }
   }
   Transaction.init({

@@ -10,8 +10,8 @@
 </head>
 
 <body class="bg-gray-50">
+
     <div class="flex h-screen overflow-hidden">
-        <!-- Simple Sidebar -->
         <div class="w-56 bg-gradient-to-r from-blue-500 to-amber-300 text-white p-4 hidden md:block">
             <div class="flex items-center mb-8 space-x-2">
                 <i class="fas fa-wallet text-xl"></i>
@@ -21,7 +21,11 @@
             <nav class="space-y-3">
                 <a href="/dashboard" class="flex items-center space-x-2 p-2 rounded hover:bg-blue-700">
                     <i class="fas fa-chart-pie w-5"></i>
-                    <span class="font-bold">Dashboard</span>
+                    <span class="font-bold">Dasboard</span>
+                </a>
+                <a href="/accounts" class="flex items-center space-x-2 p-2 rounded hover:bg-blue-700">
+                    <i class="fas fa-chart-pie w-5"></i>
+                    <span class="font-bold">Account</span>
                 </a>
                 <a href="/transactions" class="flex items-center space-x-2 p-2 rounded hover:bg-blue-700">
                     <i class="fas fa-exchange-alt w-5"></i>
@@ -38,9 +42,7 @@
             </nav>
         </div>
 
-        <!-- Main Content -->
         <div class="flex-1 flex flex-col overflow-hidden">
-            <!-- Header -->
             <header class="bg-white shadow-sm p-4">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center">
@@ -51,70 +53,31 @@
                     </div>
                     <div class="flex items-center space-x-3">
                         <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
-                            <a href="/userprofiles/:id"><i class="fas fa-user text-gray-600"></i></a>
+                            <a href="/userprofiles"><i class="fas fa-user text-gray-600"></i></a>
                         </div>
                     </div>
                 </div>
             </header>
 
-            <!-- Mobile Menu -->
-            <div id="mobile-menu" class="fixed inset-0 z-50 hidden bg-gray-800 bg-opacity-75">
-                <div
-                    class="absolute top-0 left-0 h-screen w-56 bg-blue-800 p-4 transform -translate-x-full transition-transform duration-300">
-                    <div class="flex items-center justify-between mb-8">
-                        <div class="flex items-center space-x-2">
-                            <i class="fas fa-wallet text-xl"></i>
-                            <span class="text-lg font-semibold">FinTrack</span>
-                        </div>
-                        <button id="mobile-menu-close" class="text-white">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                    <nav class="space-y-3">
-                        <a href="#" class="block p-2 rounded bg-blue-700 text-white">
-                            <i class="fas fa-chart-pie w-5"></i>
-                            <span>Dashboard</span>
-                        </a>
-                        <a href="#" class="block p-2 rounded hover:bg-blue-700 text-white">
-                            <i class="fas fa-exchange-alt w-5"></i>
-                            <span>Transactions</span>
-                        </a>
-                        <a href="#" class="block p-2 rounded hover:bg-blue-700 text-white">
-                            <i class="fas fa-piggy-bank w-5"></i>
-                            <span>Budget</span>
-                        </a>
-                        <a href="#" class="block p-2 rounded hover:bg-blue-700 text-white">
-                            <i class="fas fa-cog w-5"></i>
-                            <span>Settings</span>
-                        </a>
-                    </nav>
-                </div>
-            </div>
-
-            <!-- Content -->
             <main class="flex-1 p-6 overflow-y-auto">
-                <!-- Profile Section -->
                 <div class="bg-white rounded-lg shadow p-6 mb-6">
                     <div class="flex flex-col items-center mb-6">
                         <div class="w-24 h-24 rounded-full bg-gray-200 mb-4 flex items-center justify-center">
                             <i class="fas fa-user text-3xl text-gray-500"></i>
                         </div>
-                        <h2 class="text-xl font-semibold">John Doe</h2>
-                        <p class="text-gray-500">john.doe@example.com</p>
+                        <h2 class="text-xl font-semibold"></h2>
+                        <p class="text-gray-500"></p>
                     </div>
 
-                    <!-- Profile Details -->
                     <div class="space-y-4">
                         <div class="border-b pb-4">
                             <h3 class="font-medium text-gray-700 mb-2">Account Information</h3>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
-                                    <p class="text-sm text-gray-500">Username</p>
-                                    <p>johndoe</p>
-                                </div>
-                                <div>
                                     <p class="text-sm text-gray-500">Member Since</p>
-                                    <p>January 15, 2023</p>
+                                    <p>
+                                        <%= data.createdAt %>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -124,15 +87,24 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <p class="text-sm text-gray-500">Full Name</p>
-                                    <p>John Doe</p>
+                                    <p>
+                                        <%= data.fullname %>
+                                    </p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Addres</p>
+                                    <p>
+                                        <%= data.adress%>
+                                    </p>
                                 </div>
                                 <div>
                                     <p class="text-sm text-gray-500">Phone</p>
-                                    <p>+1 (555) 123-4567</p>
+                                    <p>
+                                        <%= data.phone_number %>
+                                    </p>
                                 </div>
                             </div>
                         </div>
-
                         <div>
                             <h3 class="font-medium text-gray-700 mb-2">Security</h3>
                             <button class="text-blue-600 inline-flex items-center">
@@ -142,15 +114,11 @@
                     </div>
 
                     <div class="flex justify-end mt-6 gap-3">
-                        <a href="/edit-profile/:id"
+
+                        <a href="/userprofiles/edituser"
                             class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition-colors duration-200 shadow-sm">
                             Edit Profile
                         </a>
-                        <a href="/delete-profile/:id"
-                            class="inline-flex items-center justify-center px-4 py-2 bg-red-600 text-white font-medium rounded-md hover:bg-blue-700 transition-colors duration-200 shadow-sm">
-                            Delete Profile
-                        </a>
-
 
                     </div>
                 </div>
@@ -158,29 +126,9 @@
         </div>
     </div>
     </main>
-    </div>
-    </div>
-    <script>
-        // Mobile menu toggle functionality
-        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-        const mobileMenuClose = document.getElementById('mobile-menu-close');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const mobileMenuPanel = mobileMenu.querySelector('div');
 
-        mobileMenuToggle.addEventListener('click', () => {
-            mobileMenu.classList.remove('hidden');
-            setTimeout(() => {
-                mobileMenuPanel.classList.remove('-translate-x-full');
-            }, 10);
-        });
 
-        mobileMenuClose.addEventListener('click', () => {
-            mobileMenuPanel.classList.add('-translate-x-full');
-            setTimeout(() => {
-                mobileMenu.classList.add('hidden');
-            }, 300);
-        });
-    </script>
+
 </body>
 
 </html>

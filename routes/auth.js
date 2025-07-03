@@ -18,15 +18,18 @@ router.get('/auth/google', passport.authenticate('google', {
 }));
 
 router.get('/auth/google/accounts', passport.authenticate('google', {
-    successRedirect: '/accounts',
+    successRedirect: '/userprofiles/create',
     failureRedirect: '/login',
 }));
 
 router.get('/logout', (req, res) => {
-    req.logout((err) => {
-        if (err) return res.send(err);
-        res.redirect('/');
+    req.logout(function (err) {
+        if (err) { return res.send(err); }
+        req.session.destroy(function (err) {
+            res.redirect('/');
+        });
     });
 });
+
 
 module.exports = router;

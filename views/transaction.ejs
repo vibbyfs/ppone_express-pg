@@ -10,8 +10,8 @@
 </head>
 
 <body class="bg-gray-50">
+
     <div class="flex h-screen overflow-hidden">
-        <!-- Simple Sidebar -->
         <div class="w-56 bg-gradient-to-r from-blue-500 to-amber-300 text-white p-4 hidden md:block">
             <div class="flex items-center mb-8 space-x-2">
                 <i class="fas fa-wallet text-xl"></i>
@@ -42,9 +42,7 @@
             </nav>
         </div>
 
-        <!-- Main Content -->
         <div class="flex-1 flex flex-col overflow-hidden">
-            <!-- Header -->
             <header class="bg-white shadow-sm p-4">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center">
@@ -61,65 +59,10 @@
                 </div>
             </header>
 
-            <!-- Mobile Menu -->
-            <div id="mobile-menu" class="fixed inset-0 z-50 hidden bg-gray-800 bg-opacity-75">
-                <div
-                    class="absolute top-0 left-0 h-screen w-56 bg-blue-800 p-4 transform -translate-x-full transition-transform duration-300">
-                    <div class="flex items-center justify-between mb-8">
-                        <div class="flex items-center space-x-2">
-                            <i class="fas fa-wallet text-xl"></i>
-                            <span class="text-lg font-semibold">FinTrack</span>
-                        </div>
-                        <button id="mobile-menu-close" class="text-white">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                    <nav class="space-y-3">
-                        <a href="#" class="block p-2 rounded bg-blue-700 text-white">
-                            <i class="fas fa-chart-pie w-5"></i>
-                            <span>Dashboard</span>
-                        </a>
-                        <a href="#" class="block p-2 rounded hover:bg-blue-700 text-white">
-                            <i class="fas fa-exchange-alt w-5"></i>
-                            <span>Transactions</span>
-                        </a>
-                        <a href="#" class="block p-2 rounded hover:bg-blue-700 text-white">
-                            <i class="fas fa-piggy-bank w-5"></i>
-                            <span>Budget</span>
-                        </a>
-                        <a href="#" class="block p-2 rounded hover:bg-blue-700 text-white">
-                            <i class="fas fa-cog w-5"></i>
-                            <span>Settings</span>
-                        </a>
-                    </nav>
-                </div>
-            </div>
 
-            <!-- Content -->
+
             <main class="flex-1 p-6 overflow-y-auto">
-                <!-- Transactions Filter Section -->
                 <div class="bg-white rounded-lg shadow p-4 mb-6">
-                    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-4">
-                        <div>
-                            <h2 class="text-lg font-semibold">All Transactions</h2>
-                            <p class="text-xs text-gray-500">Filter transactions by type and date</p>
-                        </div>
-                        <div class="flex gap-2 w-full sm:w-auto">
-                            <select
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2">
-                                <option selected>All Types</option>
-                                <option>Income</option>
-                                <option>Expense</option>
-                            </select>
-                            <select
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2">
-                                <option selected>Last 30 Days</option>
-                                <option>This Month</option>
-                                <option>Last Month</option>
-                                <option>Custom</option>
-                            </select>
-                        </div>
-                    </div>
 
                     <div class="flex justify-between mb-4">
                         <button class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
@@ -135,7 +78,6 @@
                         </div>
                     </div>
 
-                    <!-- Table Headers -->
                     <div
                         class="hidden md:grid grid-cols-12 gap-4 p-2 bg-gray-50 rounded mb-2 text-sm font-medium text-gray-500">
                         <div class="col-span-3">Description</div>
@@ -147,95 +89,54 @@
                     </div>
 
                     <div class="space-y-3">
-                        <!-- Transaction Items -->
-                        <div class="flex flex-col md:grid md:grid-cols-12 gap-4 p-2 hover:bg-gray-50 rounded border-b">
-                            <div class="col-span-3 flex items-center space-x-3">
-                                <div class="p-2 rounded-full bg-green-100 text-green-600">
-                                    <i class="fas fa-arrow-down"></i>
+                        <% if (data && data.length> 0) { %>
+                            <% data.forEach(function(trx) { %>
+                                <div
+                                    class="flex flex-col md:grid md:grid-cols-12 gap-4 p-2 hover:bg-gray-50 rounded border-b">
+                                    <div class="col-span-3 flex items-center space-x-3">
+                                        <div class="p-2 rounded-full bg-green-100 text-green-600">
+                                            <i class="fas fa-arrow-down"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-medium">
+                                                <%= trx.description %>
+                                            </p>
+                                            <p class="text-xs text-gray-500 md:hidden">
+                                                <%= trx.date.toLocaleString() %>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-span-2 text-sm">
+                                        <span class="md:hidden text-gray-500">Category:</span>
+                                        <%= trx.category || '-' %>
+                                    </div>
+                                    <div class="col-span-2 text-sm hidden md:block">
+                                        <%= trx.date.toLocaleString() %>
+                                    </div>
+                                    <div class="col-span-2 font-medium text-green-600">
+                                        <span class="md:hidden text-gray-500">Amount:</span>
+                                        <%= trx.amount %>
+                                    </div>
+                                    <div class="col-span-2">
+                                        <span
+                                            class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Completed</span>
+                                    </div>
+                                    <div class="col-span-1 text-right">
+                                        <button class="text-gray-400 hover:text-gray-600">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </div>
                                 </div>
-                                <div>
-                                    <p class="font-medium">Salary Deposit</p>
-                                    <p class="text-xs text-gray-500 md:hidden">Today, 10:45 AM</p>
-                                </div>
-                            </div>
-                            <div class="col-span-2 text-sm">
-                                <span class="md:hidden text-gray-500">Category:</span>
-                                Income
-                            </div>
-                            <div class="col-span-2 text-sm hidden md:block">Today, 10:45 AM</div>
-                            <div class="col-span-2 font-medium text-green-600">
-                                <span class="md:hidden text-gray-500">Amount:</span>
-                                +$2,500
-                            </div>
-                            <div class="col-span-2">
-                                <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Completed</span>
-                            </div>
-                            <div class="col-span-1 text-right">
-                                <button class="text-gray-400 hover:text-gray-600">
-                                    <i class="fas fa-ellipsis-v"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Second Transaction -->
-                        <div class="flex flex-col md:grid md:grid-cols-12 gap-4 p-2 hover:bg-gray-50 rounded border-b">
-                            <div class="col-span-3 flex items-center space-x-3">
-                                <div class="p-2 rounded-full bg-red-100 text-red-600">
-                                    <i class="fas fa-shopping-bag"></i>
-                                </div>
-                                <div>
-                                    <p class="font-medium">Grocery Store</p>
-                                    <p class="text-xs text-gray-500 md:hidden">Yesterday, 3:15 PM</p>
-                                </div>
-                            </div>
-                            <div class="col-span-2 text-sm">
-                                <span class="md:hidden text-gray-500">Category:</span>
-                                Shopping
-                            </div>
-                            <div class="col-span-2 text-sm hidden md:block">Yesterday, 3:15 PM</div>
-                            <div class="col-span-2 font-medium text-red-600">
-                                <span class="md:hidden text-gray-500">Amount:</span>
-                                -$95.24
-                            </div>
-                            <div class="col-span-2">
-                                <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Completed</span>
-                            </div>
-                            <div class="col-span-1 text-right">
-                                <button class="text-gray-400 hover:text-gray-600">
-                                    <i class="fas fa-ellipsis-v"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <!-- More transactions would go here... -->
+                                <% }) %>
+                                    <% } else { %>
+                                        <div class="text-center text-gray-400 py-8">No transactions found.</div>
+                                        <% } %>
                     </div>
 
                 </div>
-
+            </main>
         </div>
-        </main>
     </div>
-    </div>
-    <script>
-        // Mobile menu toggle functionality
-        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-        const mobileMenuClose = document.getElementById('mobile-menu-close');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const mobileMenuPanel = mobileMenu.querySelector('div');
-
-        mobileMenuToggle.addEventListener('click', () => {
-            mobileMenu.classList.remove('hidden');
-            setTimeout(() => {
-                mobileMenuPanel.classList.remove('-translate-x-full');
-            }, 10);
-        });
-
-        mobileMenuClose.addEventListener('click', () => {
-            mobileMenuPanel.classList.add('-translate-x-full');
-            setTimeout(() => {
-                mobileMenu.classList.add('hidden');
-            }, 300);
-        });
-    </script>
 </body>
 
 </html>

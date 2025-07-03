@@ -2,14 +2,20 @@ const express = require('express');
 const Controller = require('../controllers/controller');
 const router = express.Router();
 
+function ensureAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect('/login');
+}
+
+router.get('/', ensureAuthenticated, Controller.getUserProfile)
 
 router.get('/create', Controller.getCreateUserProfile)
 router.post('/create', Controller.postCreateUserProfile)
 
-// router.get('/:id', Controller.getUserProfileById)
-
-// router.get('/edit-profile/:id', Controller.getEditUserProfile)
-// router.post('/edit-profile/:id', Controller.postEditUserProfile)
+router.get('/edituser', Controller.getEditUserProfile)
+router.post('/edituser', Controller.postEditUserProfile)
 
 // router.get('/delete-profile/:id', Controller.getDeleteUserProfile)
 

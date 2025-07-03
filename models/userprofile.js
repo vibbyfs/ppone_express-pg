@@ -10,7 +10,11 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      UserProfile.belongsTo(models.User, {foreignKey: 'user_id'})
+      UserProfile.belongsTo(models.User, { foreignKey: 'user_id' })
+    }
+
+    get formatDate() {
+      return this.date_of_birth.toISOString().split('T')[0]
     }
   }
   UserProfile.init({
