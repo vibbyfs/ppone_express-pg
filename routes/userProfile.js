@@ -17,6 +17,4 @@ router.post('/create', Controller.postCreateUserProfile)
 router.get('/edituser', Controller.getEditUserProfile)
 router.post('/edituser', Controller.postEditUserProfile)
 
-// router.get('/delete-profile/:id', Controller.getDeleteUserProfile)
-
 module.exports = router

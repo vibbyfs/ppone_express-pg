@@ -168,7 +168,8 @@ class Controller {
                 order: [['date', 'DESC']]
             });
 
-            res.render('transaction', { data: transactions, search });
+
+            res.render('transaction', { data: transactions, search});
         } catch (error) {
             console.log(error);
             res.send(error);
