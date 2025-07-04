@@ -139,7 +139,7 @@ class Controller {
                 });
             }
 
-            res.redirect('/accounts');
+            res.redirect('/dashboard');
         } catch (error) {
             console.log(error);
             res.send(error);

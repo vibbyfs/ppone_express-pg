@@ -11,18 +11,7 @@
                 class="min-h-screen bg-gradient-to-br from-blue-50 via-amber-50 to-blue-100 flex items-center justify-center px-4">
                 <div class="bg-white shadow-md rounded-lg p-6 w-full max-w-md">
                     <h1 class="section-title">Login to your account</h1>
-                    
-                    <% if (typeof messages !=='undefined' && messages.length> 0) { %>
-                        <div class="bg-red-100 text-red-800 p-3 rounded mb-4">
-                            <ul class="list-disc pl-4">
-                                <% messages.forEach(msg=> { %>
-                                    <li>
-                                        <%= msg %>
-                                    </li>
-                                    <% }) %>
-                            </ul>
-                        </div>
-                        <% } %>
+                   
                             <form action="/login" method="POST" class="space-y-4">
                                 <div>
                                     <label for="email" class="form-label">Email</label>
