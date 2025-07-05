@@ -1,6 +1,7 @@
 const { User, UserProfile, Account, Transaction } = require('../models')
 const { Op, where } = require('sequelize')
-const { timeAgoDetail, formatDate } = require('../helper/helper')
+const { timeAgoDetail, formatDate } = require('../helper/helper');
+const account = require('../models/account');
 
 class Controller {
 
@@ -166,7 +167,12 @@ class Controller {
 
     static async getAccount(req, res) {
         try {
-            res.render('account', { formatCurrency: Account.formatCurrency });
+            const id = req.user
+            let account = await Account.findOne({
+                account_id: id
+            })
+
+            res.render('account', { account, formatCurrency: Account.formatCurrency });
         } catch (error) {
             console.log(error);
             res.send(error)
@@ -220,9 +226,8 @@ class Controller {
                     id: req.user.id
                 }
             })
-
-            // const data = await UserProfile.findOne({ where: { user_id: req.user.id } });
             res.render('userProfile', { user, timeAgoDetail });
+
         } catch (error) {
             console.log(error);
             res.send(error);
