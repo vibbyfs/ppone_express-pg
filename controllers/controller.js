@@ -167,15 +167,13 @@ class Controller {
 
     static async getAccount(req, res) {
         try {
-            const id = req.user
-            let account = await Account.findOne({
-                account_id: id
-            })
-
+            const account = await Account.findOne({
+                where: { user_id: req.user.id }
+            });
             res.render('account', { account, formatCurrency: Account.formatCurrency });
         } catch (error) {
             console.log(error);
-            res.send(error)
+            res.send(error);
         }
     }
 
@@ -277,6 +275,11 @@ class Controller {
                 account_id
             })
 
+            await Account.increment('balance', {
+                by: amount,
+                where: { id: account_id }
+            });
+
             res.redirect('/accounts')
         } catch (error) {
             console.log(error);
@@ -286,9 +289,10 @@ class Controller {
 
     static async getWithdraw(req, res) {
         try {
-            res.render('withdraw')
+            const account = await Account.findOne({ where: { user_id: req.user.id } });
+            res.render('withdraw', { account });
         } catch (error) {
-            res.send(error)
+            res.send(error);
         }
     }
 
@@ -312,6 +316,13 @@ class Controller {
                 type_transaction: 'withdraw',
                 description,
                 account_id
+            });
+
+            const postivieNumber = Math.abs(minusNumber)
+
+            await Account.decrement('balance', {
+                by: postivieNumber,
+                where: { id: account_id }
             });
 
             res.redirect('/accounts');

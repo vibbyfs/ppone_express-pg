@@ -5,7 +5,7 @@ const router = express.Router();
 router.get('/', Controller.getAccount)
 
 router.get('/topup', Controller.getTopUp)
-router.get('/topup', Controller.getTopUp)
+router.post('/topup', Controller.postTopUp)
 
 router.get('/withdraw', Controller.getWithdraw)
 router.post('/withdraw', Controller.postWithdraw)
