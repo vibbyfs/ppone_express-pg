@@ -1,5 +1,5 @@
 const { User, UserProfile, Account, Transaction } = require('../models')
-const { Op } = require('sequelize')
+const { Op, where } = require('sequelize')
 const { timeAgoDetail, formatDate } = require('../helper/helper')
 
 class Controller {
@@ -213,8 +213,16 @@ class Controller {
 
     static async getUserProfile(req, res) {
         try {
-            const data = await UserProfile.findOne({ where: { user_id: req.user.id } });
-            res.render('userProfile', { data, timeAgoDetail });
+
+            let user = await User.findAll({
+                include: UserProfile,
+                where: {
+                    id: req.user.id
+                }
+            })
+
+            // const data = await UserProfile.findOne({ where: { user_id: req.user.id } });
+            res.render('userProfile', { user, timeAgoDetail });
         } catch (error) {
             console.log(error);
             res.send(error);

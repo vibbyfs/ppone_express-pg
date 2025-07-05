@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static formatCurrency(amount) {
-      return 'Rp ' + Number(amount).toLocaleString('id-ID');
+      return 'IDR ' + Number(amount).toLocaleString('id-ID');
     }
 
     static associate(models) {

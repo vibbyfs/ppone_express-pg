@@ -10,7 +10,6 @@
 </head>
 
 <body class="bg-gray-50">
-
     <div class="flex h-screen overflow-hidden">
         <div class="w-56 bg-gradient-to-r bg-black text-white p-4 hidden md:block">
             <div class="flex items-center mb-8 space-x-2">
@@ -69,58 +68,66 @@
                         <p class="text-gray-500"></p>
                     </div>
 
-                    <div class="space-y-4">
-                        <div class="border-b pb-4">
-                            <h3 class="font-medium text-gray-700 mb-2">Account Information</h3>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <p class="text-sm text-gray-500">Member Since</p>
-                                    <p>
-                                        <%= timeAgoDetail(data.createdAt) %>
-                                    </p>
+                    <% user.forEach(u=> { %>
+                        <div class="space-y-4">
+                            <div class="border-b pb-4">
+                                <h3 class="font-medium text-gray-700 mb-2">Account Information</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <p class="text-sm text-gray-500">Username</p>
+                                        <p>
+                                            <%= u.username %>
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-gray-500">Member Since</p>
+                                        <p>
+                                            <%= timeAgoDetail(u.createdAt) %>
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-gray-500">Email </p>
+                                        <p>
+                                            <%= u.email %>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="border-b pb-4">
+                                <h3 class="font-medium text-gray-700 mb-2">Personal Details</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <p class="text-sm text-gray-500">Full Name</p>
+                                        <p>
+                                            <%= u.UserProfile.fullname %>
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-gray-500">Addres</p>
+                                        <p>
+                                            <%= u.UserProfile.adress %>
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-gray-500">Phone</p>
+                                        <p>
+                                            <%= u.UserProfile.phone_number %>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <% }) %>
 
-                        <div class="border-b pb-4">
-                            <h3 class="font-medium text-gray-700 mb-2">Personal Details</h3>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <p class="text-sm text-gray-500">Full Name</p>
-                                    <p>
-                                        <%= data.fullname %>
-                                    </p>
-                                </div>
-                                <div>
-                                    <p class="text-sm text-gray-500">Addres</p>
-                                    <p>
-                                        <%= data.adress%>
-                                    </p>
-                                </div>
-                                <div>
-                                    <p class="text-sm text-gray-500">Phone</p>
-                                    <p>
-                                        <%= data.phone_number %>
-                                    </p>
-                                </div>
+                            <div class="flex justify-end mt-6 gap-3">
+
+                                <a href="/userprofiles/edituser"
+                                    class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition-colors duration-200 shadow-sm">
+                                    Edit Profile
+                                </a>
+
                             </div>
-                        </div>
-                        <div>
-                            <h3 class="font-medium text-gray-700 mb-2">Security</h3>
-                            <button class="text-blue-600 inline-flex items-center">
-                                <i class="fas fa-lock mr-2"></i> Change Password
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="flex justify-end mt-6 gap-3">
-
-                        <a href="/userprofiles/edituser"
-                            class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition-colors duration-200 shadow-sm">
-                            Edit Profile
-                        </a>
-
-                    </div>
                 </div>
 
         </div>
