@@ -20,7 +20,9 @@ module.exports = (sequelize, DataTypes) => {
     account_id: DataTypes.INTEGER,
     amount: DataTypes.DECIMAL,
     date: DataTypes.DATE,
-    description: DataTypes.STRING
+    description: DataTypes.STRING,
+    type_transaction: DataTypes.STRING
+
   }, {
     sequelize,
     modelName: 'Transaction',

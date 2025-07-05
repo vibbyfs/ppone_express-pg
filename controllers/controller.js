@@ -251,6 +251,39 @@ class Controller {
         }
     }
 
+    static async getTopUp(req, res) {
+        try {
+            res.render('topUp')
+        } catch (error) {
+            res.send(error)
+        }
+    }
+
+    static async postTopUp(req, res) {
+        try {
+            const { amount, description } = req.body
+
+            const account = await Account.findOne({
+                where: {
+                    user_id: req.user.id
+                }
+            })
+            const account_id = account.id
+
+            await Transaction.create({
+                amount,
+                type_transaction: 'income',
+                description,
+                account_id
+            })
+
+            res.redirect('/accounts')
+        } catch (error) {
+            console.log(error);
+            res.send(error)
+        }
+    }
+
 }
 
 module.exports = Controller

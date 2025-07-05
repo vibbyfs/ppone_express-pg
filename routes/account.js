@@ -3,6 +3,10 @@ const Controller = require('../controllers/controller');
 const router = express.Router();
 
 router.get('/', Controller.getAccount)
+
+router.get('/topup', Controller.getTopUp)
+router.post('/topup', Controller.postTopUp)
+
 router.get('/:id', Controller.getAccount)
 
 module.exports = router
