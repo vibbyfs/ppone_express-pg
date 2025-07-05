@@ -19,5 +19,4 @@ function timeAgoDetail(dateInput) {
   return `${Math.floor(diffMs / year)} years ago`;
 }
 
-
 module.exports = { timeAgoDetail };

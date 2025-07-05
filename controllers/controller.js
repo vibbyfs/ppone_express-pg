@@ -166,7 +166,7 @@ class Controller {
 
     static async getAccount(req, res) {
         try {
-            res.render('account');
+            res.render('account', { formatCurrency: Account.formatCurrency });
         } catch (error) {
             console.log(error);
             res.send(error)
