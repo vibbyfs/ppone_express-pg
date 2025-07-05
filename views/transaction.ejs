@@ -118,7 +118,7 @@
                                         <%= trx.category || '-' %>
                                     </div>
                                     <div class="col-span-2 text-sm hidden md:block">
-                                        <%= formatDate(trx.date) %>
+                                        <%= formatDate(trx.createdAt) %>
                                     </div>
                                     <div
                                         class="col-span-2 font-medium <%= isIncome ? 'text-green-600' : 'text-red-600' %>">
