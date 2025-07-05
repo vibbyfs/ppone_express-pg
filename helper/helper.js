@@ -19,4 +19,16 @@ function timeAgoDetail(dateInput) {
   return `${Math.floor(diffMs / year)} years ago`;
 }
 
-module.exports = { timeAgoDetail };
+function formatDate(date) {
+  return new Date(date).toLocaleString('id-ID', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true
+  });
+}
+
+module.exports = { timeAgoDetail, formatDate };

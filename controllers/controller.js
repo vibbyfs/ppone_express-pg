@@ -1,6 +1,6 @@
 const { User, UserProfile, Account, Transaction } = require('../models')
 const { Op } = require('sequelize')
-const { timeAgoDetail } = require('../helper/helper')
+const { timeAgoDetail, formatDate } = require('../helper/helper')
 
 class Controller {
 
@@ -147,17 +147,17 @@ class Controller {
 
             const accountIds = accounts.map(acc => acc.id);
 
-            let whereClause = { account_id: accountIds };
+            let accId = { account_id: accountIds };
             if (search) {
-                whereClause.description = { [Op.iLike]: `%${search}%` };
+                accId.description = { [Op.iLike]: `%${search}%` };
             }
 
             const transactions = await Transaction.findAll({
-                where: whereClause,
+                where: accId,
                 order: [['date', 'DESC']]
             });
 
-            res.render('transaction', { data: transactions, search });
+            res.render('transaction', { data: transactions, search, formatDate });
         } catch (error) {
             console.log(error);
             res.send(error);
@@ -223,8 +223,14 @@ class Controller {
 
     static async deleteTransaction(req, res) {
         try {
-            const { id } = req.params;
+            let { id } = req.params;
+
+            const transaction = await Transaction.findByPk(id);
+            let successDelete = transaction ? transaction.description : ' ';
+
             await Transaction.destroy({ where: { id } });
+
+            req.flash('success', `Transaction ${successDelete} deleted succesfully`)
             res.redirect('/transactions');
         } catch (error) {
             console.log(error);
