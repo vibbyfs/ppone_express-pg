@@ -284,6 +284,45 @@ class Controller {
         }
     }
 
+    static async getWithdraw(req, res) {
+        try {
+            res.render('withdraw')
+        } catch (error) {
+            res.send(error)
+        }
+    }
+
+    static async postWithdraw(req, res) {
+        try {
+            const { amount, description } = req.body;
+
+            const account = await Account.findOne({
+                where: {
+                    user_id: req.user.id
+                }
+            });
+
+            const account_id = account.id;
+
+            const number = Number(amount);
+            const minusNumber = number > 0 ? -number : number;
+
+            await Transaction.create({
+                amount: minusNumber,
+                type_transaction: 'withdraw',
+                description,
+                account_id
+            });
+
+            res.redirect('/accounts');
+        } catch (error) {
+            console.log(error);
+            res.send(error)
+        }
+    }
+
+
+
 }
 
 module.exports = Controller
