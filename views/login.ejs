@@ -11,16 +11,22 @@
                 class="min-h-screen bg-gradient-to-br from-blue-50 via-amber-50 to-blue-100 flex items-center justify-center px-4">
                 <div class="bg-white shadow-md rounded-lg p-6 w-full max-w-md">
                     <h1 class="section-title">Login to your account</h1>
-                   
+
+                    <% if (errors && errors.length) { %>
+                        <div class="text-red-600">
+                            <%= errors[0] %>
+                        </div>
+                        <% } %>
+
                             <form action="/login" method="POST" class="space-y-4">
                                 <div>
-                                    <label for="email" class="form-label">Email</label>
+                                    <label class="form-label">Email</label>
                                     <input type="email" name="email" class="form-input">
 
                                 </div>
 
                                 <div>
-                                    <label for="password" class="form-label">Password</label>
+                                    <label class="form-label">Password</label>
                                     <input type="password" name="password" class="form-input">
 
                                 </div>
@@ -40,6 +46,7 @@
                                         alt="Google">
                                     Login with Google
                                 </a>
+
                             </form>
                 </div>
             </section>

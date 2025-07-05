@@ -9,6 +9,14 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
+
+    static checkBalanceStatus(balance) {
+    if (balance < 10_000) {
+      return 'Silahkan top up saldo anda';
+    }
+    
+  }
+
     static associate(models) {
       
       Account.hasMany(models.Transaction, {foreignKey : 'account_id'})

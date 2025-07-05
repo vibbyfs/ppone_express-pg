@@ -54,25 +54,19 @@ module.exports = (sequelize, DataTypes) => {
           args: [8, 100],
           msg: "Password must be at least 8 characters"
         },
-        isStrong(value) {
-          if (!/[A-Za-z]/.test(value) || !/[0-9]/.test(value)) {
-            throw new Error("Password must include letters and numbers");
-          }
-        }
       }
     },
     role: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'User',
-  });
-
-  User.beforeCreate(async (user, options) => {
-    if (user.password) {
-      const saltRounds = await bcrypt.genSalt(10);
-      user.password = await bcrypt.hash(user.password, saltRounds);
+    hooks: {
+      beforeCreate: async (user) => {
+        if (user.password) {
+          user.password = await bcrypt.hash(user.password, 10)
+        }
+      }
     }
   });
-
   return User;
 };

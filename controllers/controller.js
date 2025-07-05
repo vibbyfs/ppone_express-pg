@@ -1,7 +1,5 @@
 const { User, UserProfile, Account, Transaction } = require('../models')
-const bcrypt = require('bcrypt');
-const { render } = require('ejs');
-const { Op, where } = require('sequelize')
+const { Op } = require('sequelize')
 const { timeAgoDetail } = require('../helper/helper')
 
 class Controller {
@@ -17,8 +15,7 @@ class Controller {
 
     static async getRegister(req, res) {
         try {
-            const { errors } = req.query
-            res.render('register', { errors })
+            res.render('register')
         } catch (error) {
             console.log(error);
             res.send(error)
@@ -28,27 +25,11 @@ class Controller {
     static async postRegister(req, res) {
         try {
             const { username, email, password } = req.body
-            const saltRounds = 10
 
-            const usernameRegistered = await User.findOne({ where: { username } })
-            if (usernameRegistered) {
-                return res.render('register', {
-                    errors: { username: 'Username sudah terdaftar' }
-                })
-            }
-
-            const emailRegistered = await User.findOne({
-                where: { email }
-            })
-            if (emailRegistered) {
-                return res.render('register', { errors: { email: 'Email sudah terdaftar' } })
-            }
-
-            const hashedPassword = await bcrypt.hash(password, saltRounds)
             const user = await User.create({
                 username,
                 email,
-                password: hashedPassword
+                password
             })
 
             await Account.create({
@@ -65,10 +46,8 @@ class Controller {
             })
         } catch (error) {
             if (error.name === 'SequelizeValidationError') {
-                const messages = error.errors.map(e => e.message);
-                console.log(messages);
-
-                res.render('register', { messages });
+                const messages = error.errors.map(el => el.message);
+                res.render('register', { errors: messages });
             } else {
                 res.send(error);
             }
@@ -77,15 +56,10 @@ class Controller {
 
     static async getLogin(req, res) {
         try {
-            const { message } = req.query
-            res.render('login', { message })
+            const messages = res.locals.errors
+            res.render('login', { errors: messages })
         } catch (error) {
-            if (error.name === 'SequelizeValidationError') {
-                const messages = error.errors.map(e => e.message);
-                res.render('login', { messages });
-            } else {
-                res.send(error);
-            }
+            res.send(error);
         }
     }
 
@@ -169,7 +143,7 @@ class Controller {
             });
 
 
-            res.render('transaction', { data: transactions, search});
+            res.render('transaction', { data: transactions, search });
         } catch (error) {
             console.log(error);
             res.send(error);

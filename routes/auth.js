@@ -10,6 +10,7 @@ router.get('/login', Controller.getLogin);
 router.post('/login', passport.authenticate('local', {
     successRedirect: '/dashboard',
     failureRedirect: '/login',
+    failureFlash: true
 }));
 
 router.get('/auth/google', passport.authenticate('google', {
