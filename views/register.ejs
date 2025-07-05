@@ -13,9 +13,9 @@
                     <h1 class="section-title">Create an Account</h1>
 
                     <% if (errors && errors.length) { %>
-                        <div>
+                        <div class="mb-3">
                             <% errors.forEach(msg=> { %>
-                                <div>
+                                <div class="text-red-600">
                                     <%= msg %>
                                 </div>
                                 <% }) %>

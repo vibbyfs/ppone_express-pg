@@ -26,6 +26,16 @@ class Controller {
         try {
             const { username, email, password } = req.body
 
+            const usernameExist = await User.findOne({ where: { username } });
+            if (usernameExist) {
+                return res.render('register', { errors: ["Username already exists"] });
+            }
+
+            const emailExist = await User.findOne({ where: { email } });
+            if (emailExist) {
+                return res.render('register', { errors: ["Email already exists"] });
+            }
+
             const user = await User.create({
                 username,
                 email,
@@ -83,7 +93,7 @@ class Controller {
             if (existingProfile) {
                 return res.redirect('/dashboard');
             }
-            res.render('formCreateProfile')
+            res.render('formCreateProfile', { errors: [] })
         } catch (error) {
             console.log(error);
             res.send(error)
@@ -112,11 +122,16 @@ class Controller {
                     user_id
                 });
             }
-
             res.redirect('/dashboard');
+
         } catch (error) {
-            console.log(error);
-            res.send(error);
+            if (error.name === "SequelizeValidationError") {
+                const messages = error.errors.map(el => el.message)
+                res.render('formCreateProfile', { errors: messages })
+            } else {
+                res.send(error);
+
+            }
         }
     }
 
@@ -142,7 +157,6 @@ class Controller {
                 order: [['date', 'DESC']]
             });
 
-
             res.render('transaction', { data: transactions, search });
         } catch (error) {
             console.log(error);
@@ -163,8 +177,6 @@ class Controller {
         try {
             const id = req.user
             let data = await UserProfile.findOne({ user_id: id })
-            console.log(req.user);
-
             res.render('dashboard', { data })
         } catch (error) {
             console.log(error);
