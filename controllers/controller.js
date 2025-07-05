@@ -1,7 +1,6 @@
 const { User, UserProfile, Account, Transaction } = require('../models')
-const { Op, where } = require('sequelize')
+const { Op } = require('sequelize')
 const { timeAgoDetail, formatDate } = require('../helper/helper');
-const account = require('../models/account');
 
 class Controller {
 
@@ -158,7 +157,7 @@ class Controller {
                 order: [['date', 'DESC']]
             });
 
-            res.render('transaction', { data: transactions, search, formatDate });
+            res.render('transaction', { data: transactions, search, formatDate, formatCurrency: Transaction.formatCurrency });
         } catch (error) {
             console.log(error);
             res.send(error);

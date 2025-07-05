@@ -9,12 +9,17 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
+
+    static formatCurrency(amount) {
+      return 'Rp ' + Number(amount).toLocaleString('id-ID');
+    }
+
     static associate(models) {
       Transaction.hasMany(models.TransactionCategory, { foreignKey: 'transaction_id' })
       Transaction.belongsTo(models.Account, { foreignKey: 'account_id' })
     }
 
-   
+
   }
   Transaction.init({
     account_id: DataTypes.INTEGER,
