@@ -305,7 +305,7 @@ class Controller {
             const number = Number(amount);
 
             if (account.balance < number) {
-                req.flash('error', 'Saldo tidak mencukupi untuk penarikan');
+                req.flash('error', 'Insufficient balance for withdrawal');
                 return res.redirect('/accounts/withdraw');
             }
 

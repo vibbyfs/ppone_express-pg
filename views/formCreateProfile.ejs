@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Finance Dashboard</title>
+    <title>Create User</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -27,11 +27,7 @@
                         </button>
                         <h1 class="text-xl font-semibold">Complete Registration</h1>
                     </div>
-                    <div class="flex items-center space-x-3">
-                        <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
-                            <i class="fas fa-user text-gray-600"></i>
-                        </div>
-                    </div>
+
                 </div>
             </header>
 
@@ -67,15 +63,13 @@
             <main class="flex-1 p-6 overflow-y-auto">
                 <form action="/userprofiles/create" method="post">
                     <div class="bg-white rounded-lg shadow p-6 max-w-2xl mx-auto">
+
                         <% if (errors && errors.length) { %>
-                            <div>
-                                <% errors.forEach(msg=> { %>
-                                    <div class="text-red-600">
-                                        <%= msg %>
-                                    </div>
-                                    <% }) %>
+                            <div class="bg-red-100 text-red-800 p-2 rounded mb-4 text-center">
+                                <%= errors[0] %>
                             </div>
                             <% } %>
+
                                 <div class="flex flex-col items-center mb-6">
                                     <div class="relative w-24 h-24 rounded-full bg-gray-200 mb-4 overflow-hidden">
                                         <input type="file" name="image" class="hidden" accept="image/*">
@@ -120,10 +114,16 @@
                                 </div>
 
                                 <div class="flex justify-end mt-6 space-x-3">
+
+                                    <a href="/logout"><button
+                                            class="px-6 py-2 bg-red-500 text-white rounded-md hover:bg-red-700">
+                                            Cancel Registration
+                                        </button></a>
                                     <button type="submit"
                                         class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
                                         Complete Registration
                                     </button>
+
                                 </div>
                     </div>
                 </form>

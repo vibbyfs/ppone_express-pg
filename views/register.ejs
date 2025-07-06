@@ -13,15 +13,10 @@
                     <h1 class="section-title">Create an Account</h1>
 
                     <% if (errors && errors.length) { %>
-                        <div class="mb-3">
-                            <% errors.forEach(msg=> { %>
-                                <div class="text-red-600">
-                                    <%= msg %>
-                                </div>
-                                <% }) %>
+                        <div class="bg-red-100 text-red-800 p-2 rounded mb-4 text-center">
+                            <%= errors[0] %>
                         </div>
                         <% } %>
-
 
                             <form action="/register" method="POST" class="space-y-4">
                                 <div>
