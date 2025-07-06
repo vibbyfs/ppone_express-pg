@@ -298,36 +298,34 @@ class Controller {
     static async postWithdraw(req, res) {
         try {
             const { amount, description } = req.body;
-
             const account = await Account.findOne({
-                where: {
-                    user_id: req.user.id
-                }
+                where: { user_id: req.user.id }
             });
-
             const account_id = account.id;
-
             const number = Number(amount);
-            const minusNumber = number > 0 ? -number : number;
+
+            if (account.balance < number) {
+                req.flash('error', 'Saldo tidak mencukupi untuk penarikan');
+                return res.redirect('/accounts/withdraw');
+            }
 
             await Transaction.create({
-                amount: minusNumber,
+                amount: -number,
                 type_transaction: 'withdraw',
                 description,
                 account_id
             });
 
-            const postivieNumber = Math.abs(minusNumber)
-
             await Account.decrement('balance', {
-                by: postivieNumber,
+                by: number,
                 where: { id: account_id }
             });
 
+            req.flash('success', 'Withdraw success');
             res.redirect('/accounts');
         } catch (error) {
             console.log(error);
-            res.send(error)
+            res.send(error);
         }
     }
 
