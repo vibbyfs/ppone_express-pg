@@ -147,13 +147,19 @@ class Controller {
 
             const accountIds = accounts.map(acc => acc.id);
 
-            let accId = { account_id: accountIds };
+            let whereClause = { account_id: accountIds };
             if (search) {
-                accId.description = { [Op.iLike]: `%${search}%` };
+                whereClause = {
+                    account_id: accountIds,
+                    [Op.or]: [
+                        { description: { [Op.iLike]: `%${search}%` } },
+                        { type_transaction: { [Op.iLike]: `%${search}%` } }
+                    ]
+                };
             }
 
             const transactions = await Transaction.findAll({
-                where: accId,
+                where: whereClause,
                 order: [['date', 'DESC']]
             });
 
